@@ -64,7 +64,7 @@ pip install -r requirements.txt
 
 ### 3. 准备模型
 
-这里拿VisualGLM-6B模型为例。
+这里拿VisualGLM-6B模型为例。其他如千问3等此类模型也可以使用本项目部署，方法一样。
 我这里已经下好了除模型参数文件外的其他文件，项目默认使用本地 `./visualglm` 目录加载模型。如果该目录不存在，将自动从 HuggingFace 下载 `THUDM/visualglm-6b` 模型。
 
 或者手动下载模型：
@@ -125,7 +125,7 @@ python app.py
 
 ## 许可证
 
-本项目采用 [Apache-2.0](LICENSE) 许可证。
+VisualGLM-6B 模型项目采用 [Apache-2.0](LICENSE) 许可证。
 
 模型权重遵循 VisualGLM-6B 的 [MODEL_LICENSE](visualglm/MODEL_LICENSE)。
 
