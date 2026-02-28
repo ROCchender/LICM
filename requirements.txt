@@ -1,0 +1,29 @@
+# Web框架
+flask==3.0.0
+flask-cors==4.0.0
+
+# PyTorch深度学习框架
+torch>=2.0.0
+torchvision>=0.15.0
+
+# 图像处理
+pillow>=10.0.0
+
+# HuggingFace Transformers库
+transformers>=4.35.0
+
+# VisualGLM依赖
+swissarmytransformer>=0.4.0
+
+# 量化加速（可选，用于降低显存占用）
+bitsandbytes>=0.41.0
+accelerate>=0.24.0
+
+# 文本处理
+sentencepiece>=0.1.99
+protobuf>=3.20.0
+
+# 其他依赖
+numpy>=1.24.0
+tqdm>=4.65.0
+requests>=2.31.0

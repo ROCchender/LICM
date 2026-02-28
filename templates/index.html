@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LICM Pro - 智能图像识别系统</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- 头部 -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                    </svg>
+                </span>
+                <span class="logo-text">LICM Pro</span>
+            </div>
+            <nav class="nav">
+                <a href="#" class="nav-link active" data-page="recognition">图像识别</a>
+                <a href="#" class="nav-link" data-page="history">历史记录</a>
+                <a href="#" class="nav-link" data-page="settings">设置</a>
+            </nav>
+        </header>
+
+        <!-- 主内容区 -->
+        <main class="main">
+            <!-- 图像识别页面 -->
+            <div id="page-recognition" class="page active">
+                <div class="hero">
+                    <h1 class="hero-title">AI 图像识别与分析</h1>
+                    <p class="hero-subtitle">基于 多模态模型 的智能图像理解，支持多种识别模式</p>
+                </div>
+
+                <div class="upload-section">
+                    <div class="upload-area" id="uploadArea">
+                        <div class="upload-content">
+                            <div class="upload-icon">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                    <path d="M12 16V4m0 0l-4 4m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/>
+                                </svg>
+                            </div>
+                            <h3 class="upload-title">拖拽图片到此处，或点击上传</h3>
+                            <p class="upload-desc">支持 JPG、PNG、WebP、BMP 等图片格式</p>
+                            <input type="file" id="fileInput" class="file-input" accept="image/*" multiple>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preview-section" id="previewSection" style="display: none;">
+                    <h2 class="section-title">待识别图片</h2>
+                    <div class="preview-grid" id="previewGrid"></div>
+                </div>
+
+                <div class="settings-panel">
+                    <div class="settings-header">
+                        <span class="settings-icon">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                            </svg>
+                        </span>
+                        <span class="settings-title">处理设置</span>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3 class="setting-label">识别类型</h3>
+                        <div class="types-grid">
+                            <div class="type-card active" data-type="general">
+                                <div class="type-card-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                                        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+                                    </svg>
+                                </div>
+                                <div class="type-card-info">
+                                    <div class="type-card-name">通用描述</div>
+                                    <div class="type-card-desc">生成图片的一般性描述</div>
+                                </div>
+                            </div>
+                            <div class="type-card" data-type="background">
+                                <div class="type-card-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                                        <polyline points="21 15 16 10 5 21"/>
+                                    </svg>
+                                </div>
+                                <div class="type-card-info">
+                                    <div class="type-card-name">背景分析</div>
+                                    <div class="type-card-desc">专注于图片背景环境分析</div>
+                                </div>
+                            </div>
+                            <div class="type-card" data-type="detailed">
+                                <div class="type-card-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <circle cx="11" cy="11" r="8"/>
+                                        <path d="m21 21-4.35-4.35"/>
+                                        <path d="M11 8v6"/>
+                                        <path d="M8 11h6"/>
+                                    </svg>
+                                </div>
+                                <div class="type-card-info">
+                                    <div class="type-card-name">详细描述</div>
+                                    <div class="type-card-desc">生成详细的图片内容描述</div>
+                                </div>
+                            </div>
+                            <div class="type-card" data-type="english">
+                                <div class="type-card-icon">
+                                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/>
+                                        <line x1="4" y1="22" x2="4" y2="15"/>
+                                    </svg>
+                                </div>
+                                <div class="type-card-info">
+                                    <div class="type-card-name">英文表述（测试）</div>
+                                    <div class="type-card-desc">不但局限于中文，还能使用英文描述</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-group">
+                        <h3 class="setting-label">模型选择</h3>
+                        <div class="models-grid-horizontal">
+                            <div class="model-card-h active" data-model="fusion">
+                                <div class="model-card-h-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+                                    </svg>
+                                </div>
+                                <div class="model-card-h-info">
+                                    <div class="model-card-h-name">VGLM融合模型</div>
+                                    <div class="model-card-h-desc">自训练本地GLM模型</div>
+                                </div>
+                                <div class="model-card-h-check">✓</div>
+                            </div>
+                            <div class="model-card-h" data-model="qwen-vl">
+                                <div class="model-card-h-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                        <path d="M2 17l10 5 10-5"/>
+                                        <path d="M2 12l10 5 10-5"/>
+                                    </svg>
+                                </div>
+                                <div class="model-card-h-info">
+                                    <div class="model-card-h-name">通义千问VL</div>
+                                    <div class="model-card-h-desc">阿里云视觉语言大模型</div>
+                                </div>
+                                <div class="model-card-h-check">✓</div>
+                            </div>
+                            <div class="model-card-h" data-model="hunyuan-vision">
+                                <div class="model-card-h-icon">
+                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                        <path d="M12 2a10 10 0 1 0 10 10H12V2z"/>
+                                        <path d="M12 2a10 10 0 0 1 10 10"/>
+                                        <path d="M12 12L20 6"/>
+                                    </svg>
+                                </div>
+                                <div class="model-card-h-info">
+                                    <div class="model-card-h-name">腾讯混元Vision</div>
+                                    <div class="model-card-h-desc">腾讯多模态理解大模型</div>
+                                </div>
+                                <div class="model-card-h-check">✓</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="setting-action">
+                        <button class="start-btn" id="startBtn" disabled>
+                            <span class="btn-icon">▶</span>
+                            <span class="btn-text">开始识别</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="chat-section" id="chatSection" style="display: none;">
+                    <div class="chat-header">
+                        <h2 class="section-title">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                            </svg>
+                            智能对话
+                        </h2>
+                        <span class="chat-subtitle">基于当前图片进行问答</span>
+                    </div>
+                    <div class="chat-container" id="chatContainer">
+                        <div class="chat-message ai-message">
+                            <div class="message-avatar">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                                    <circle cx="8.5" cy="8.5" r="1.5"/>
+                                    <circle cx="15.5" cy="8.5" r="1.5"/>
+                                    <path d="M9 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"/>
+                                </svg>
+                            </div>
+                            <div class="message-content">
+                                <div class="message-text">你好！我已经分析了这张图片。你可以就图片内容向我提问，我会尽力回答。</div>
+                                <div class="message-time"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <input type="text" class="chat-input" id="chatInput" placeholder="输入你的问题..." disabled>
+                        <button class="chat-send-btn" id="chatSendBtn" disabled>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="results-section" id="resultsSection" style="display: none;">
+                    <h2 class="section-title">识别结果</h2>
+                    <div class="results-list" id="resultsList"></div>
+                </div>
+            </div>
+
+            <!-- 历史记录页面 -->
+            <div id="page-history" class="page">
+                <div class="hero">
+                    <h1 class="hero-title">历史记录</h1>
+                    <p class="hero-subtitle">查看你之前的识别记录</p>
+                </div>
+                <div class="history-empty" id="historyEmpty">
+                    <div class="empty-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"/>
+                            <polyline points="12 6 12 12 16 14"/>
+                        </svg>
+                    </div>
+                    <h3 class="empty-title">暂无记录</h3>
+                    <p class="empty-desc">开始识别图片，记录将会显示在这里</p>
+                </div>
+                <div class="history-list" id="historyList" style="display: none;"></div>
+            </div>
+
+            <!-- 设置页面 -->
+            <div id="page-settings" class="page">
+                <div class="hero">
+                    <h1 class="hero-title">设置</h1>
+                    <p class="hero-subtitle">自定义你的使用偏好</p>
+                </div>
+                <div class="settings-list">
+                    <div class="setting-item">
+                        <div class="setting-item-info">
+                            <h3 class="setting-item-name">自动保存历史记录</h3>
+                            <p class="setting-item-desc">识别结果自动保存到历史记录</p>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="autoSaveToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-item-info">
+                            <h3 class="setting-item-name">暗色模式</h3>
+                            <p class="setting-item-desc">使用深色主题界面</p>
+                        </div>
+                        <label class="toggle">
+                            <input type="checkbox" id="darkModeToggle" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-item-info">
+                            <h3 class="setting-item-name">模型路径</h3>
+                            <p class="setting-item-desc">本地模型文件存储位置</p>
+                        </div>
+                        <button class="btn-secondary" id="browseModelPathBtn">浏览</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-item-info">
+                            <h3 class="setting-item-name">清除缓存</h3>
+                            <p class="setting-item-desc">清除所有临时文件和缓存</p>
+                        </div>
+                        <button class="btn-secondary" id="clearCacheBtn">清除</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Powered by <a href="https://github.com/ROCchender" target="_blank">chender</a> | 本地部署，隐私安全</p>
+        </footer>
+    </div>
+
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner" id="loadingSpinner"></div>
+        <div class="loading-progress-container" id="loadingProgressContainer" style="display: none;">
+            <div class="loading-progress-bar" id="loadingProgressBar"></div>
+        </div>
+        <p class="loading-text" id="loadingText">正在识别中...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
