@@ -71,6 +71,16 @@ pip install -r requirements.txt
 
 完整的模型实现可以在 [Hugging Face Hub](https://huggingface.co/THUDM/visualglm-6b)。如果你从 Hugging Face Hub 上下载模型参数的速度较慢，可以从[这里](https://cloud.tsinghua.edu.cn/d/43ffb021ca5f4897b56a/)手动下载模型参数文件，并从本地加载模型。
 
+#### 预训练模型
+
+本项目作者使用 MSCOCO 训练集对 VisualGLM-6B 进行了微调训练，得到了适用于图像中英文描述任务的优化模型：
+
+- **mscocoEN30000** - 基于 MSCOCO 数据集微调的 VisualGLM-6B 模型
+  - 阿里云盘下载：[下载地址](https://www.alipan.com/s/jyg74yaY9WX) (提取码: 3fp9)
+  - 相关训练代码和详细说明可参考：[VGLM 微调项目](https://github.com/ROCchender/VGLM)
+
+该微调版本在图像描述任务上有更好的表现，为 SAT 框架加载使用。
+
 ```bash
 # 从 HuggingFace 下载
 huggingface-cli download THUDM/visualglm-6b --local-dir ./visualglm
